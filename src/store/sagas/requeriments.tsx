@@ -1,4 +1,5 @@
 import Requisicao from '@/src/core/Requisicao'
+import User from '@/src/core/User'
 import { all, put, takeLatest } from 'redux-saga/effects'
 import * as t from '../types'
 
@@ -21,10 +22,35 @@ function* fetchRequeriments() {
     })
   }
 }
+function* fetchUsers() {
+  try {
+
+    const response: User = yield fetch('api/users')
+
+    const usersList: User  = yield response.json()
+
+    // console.log('resposta list' + JSON.stringify(requerimentList))
+
+    yield put({
+      type: t.USERS_FETCH_SUCCEEDED,
+      payload: usersList,
+    })
+  } catch (e) {
+    yield put({
+      type: t.USERS_FETCH_FAILED,
+      payload: e.message,
+    })
+  }
+}
 
 function* watchFetchRequeriments() {
   yield takeLatest(t.REQUERIMENT_FETCH_REQUESTED, fetchRequeriments)
 }
+
+function* watchFetchUsers() {
+  yield takeLatest(t.USERS_FETCH_REQUESTED, fetchUsers)
+}
+
 
 function* addRequeriment(action: any) {
   try {
@@ -50,8 +76,36 @@ function* addRequeriment(action: any) {
   }
 }
 
+function* addUsers(action: any) {
+  try {
+    const response: User = yield fetch('/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(action.payload),
+    })
+
+    const newUsers = yield response.json()
+
+    yield put({
+      type: t.USERS_ADD_SUCCEEDED,
+      payload: newUsers.data,
+    })
+  } catch (error) {
+    yield put({
+      type: t.USERS_ADD_FAILED,
+      payload: error.message,
+    })
+  }
+}
+
 function* watchAddReaddRequeriment() {
   yield takeLatest(t.REQUERIMENT_ADD_REQUESTED, addRequeriment)
+}
+
+function* watchAddReaddUsers() {
+  yield takeLatest(t.USERS_ADD_REQUESTED, addUsers)
 }
 
 function* deleteRequeriment(action: any) {
@@ -113,8 +167,43 @@ function* updateRequeriment(action: any) {
   }
 }
 
+function* updateUsers(action: any) {
+
+  console.log('recebendo dados para update ' + action.payload._id)
+  console.log('recebendo dados para update 2 ' + action.payload)
+
+  try {
+    const response: User = yield fetch(
+      'api/users/' + action.payload._id,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(action.payload),
+      },
+    )
+
+    const updatedUsers = yield response.json()
+
+    yield put({
+      type: t.USERS_UPDATE_SUCCEEDED,
+      payload: updatedUsers.data,
+    })
+  } catch (error) {
+    yield put({
+      type: t.USERS_UPDATE_FAILED,
+      payload: error.message,
+    })
+  }
+}
+
 function* watchUpdateRequeriment() {
   yield takeLatest(t.REQUERIMENT_UPDATE_REQUESTED, updateRequeriment)
+}
+
+function* watchUpdateUsers() {
+  yield takeLatest(t.USERS_UPDATE_REQUESTED, updateUsers)
 }
 
 export default function* rootSaga() {
@@ -123,5 +212,9 @@ export default function* rootSaga() {
     watchAddReaddRequeriment(),
     watchRemoveRequeriment(),
     watchUpdateRequeriment(),
+    watchFetchUsers(),
+    watchAddReaddUsers(),
+    watchUpdateUsers(),
+    
   ])
 }

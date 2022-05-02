@@ -1,4 +1,3 @@
-
 export default class Requisicao {
     #_id: string 
     #guid: string

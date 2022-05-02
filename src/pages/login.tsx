@@ -1,6 +1,8 @@
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { NextRouter, useRouter } from 'next/dist/client/router'
+import axios from 'axios'
 
 interface LoginPageProps {}
 
@@ -10,15 +12,29 @@ type FormValues = {
 }
 
 const LoginPage: NextPage<LoginPageProps> = (props) => {
-  //descontrui o useForm e tipando com email e password
+  const router : NextRouter = useRouter();
   const { register, handleSubmit } = useForm<FormValues>()
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    //desconstrui o retorno data
-    const { email, password } = data
+  async function onSubmit(data: FormValues) : Promise<void>{
+    
+    const { email, password} = data;
 
-    alert(email)
-    alert(JSON.stringify(data))
+    try{
+
+      await axios.post(`${process.env.NEXT_PUBLIC_API_HOST}/login`, {
+        email,
+        password
+      });
+
+      router.push('/dashboard')
+
+    } catch(error){
+
+      console.log(error);
+      alert("Não foi possível efetuar login !");
+
+    }
+
   }
 
   return (
