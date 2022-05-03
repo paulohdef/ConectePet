@@ -14,6 +14,7 @@
     "axios": "^0.26.1",
     "chart.js": "^3.7.1",
     "clsx": "^1.1.1",
+    "json-server": "^0.17.0",
     "moment": "^2.29.2",
     "next": "12.1.0",
     "next-redux-saga": "^4.1.2",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@types/accounting": "^0.4.2",
     "@types/node": "17.0.21",
+    "json-server": "^0.17.0",
     "@types/react": "17.0.40",
     "eslint": "8.11.0",
     "eslint-config-next": "12.1.0",

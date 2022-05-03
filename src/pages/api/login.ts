@@ -26,6 +26,7 @@ async function Login(req: NextApiRequest, res: NextApiResponse) {
     console.error(error);
     res.status(401).json({ message: "Acesso negado."});
   }
+
 }
 
 export default Login;

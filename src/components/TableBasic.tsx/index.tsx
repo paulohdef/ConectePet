@@ -5,6 +5,7 @@ import moment from 'moment'
 import Requisicao from '../../core/Requisicao'
 import { PencilSVG, TrashSVG } from '../icons'
 
+
 import {
   deleteRequeriment,
   fetchRequeriments,
@@ -23,7 +24,7 @@ const formatDate = (value: string) => {
 }
 
 export default function TableBasic(props: TableBasicProps) {
-  const state = useSelector((state) => state.requeriment)
+  const state = useSelector((state : any) => state.requeriment)
 
   const dispatch = useDispatch()
 
