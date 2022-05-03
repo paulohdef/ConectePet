@@ -80,18 +80,7 @@ export default function TableBasicUsers(props: TableBasicProps) {
               <td className={` text-left text-xs  p-2`}> {phone} </td>
               <td className={` text-left text-xs  p-2`}> {address} </td>
 
-              <td>
-                <button
-                  className="btn btn__compact btn__edit"
-                  onClick={() => {
-                    dispatch(setSelectedRequeriment(_id))
 
-                  }}
-                >
-                  <PencilSVG />
-                </button>
-
-              </td>
             </tr>
           ),
         )}
