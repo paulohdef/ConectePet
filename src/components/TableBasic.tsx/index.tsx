@@ -14,6 +14,7 @@ import {
 } from '../../store'
 
 import { useEffect } from 'react'
+import { RootState } from '@/src/store/reducers'
 
 interface TableBasicProps {
   requisicao?: Requisicao[]
@@ -24,7 +25,7 @@ const formatDate = (value: string) => {
 }
 
 export default function TableBasic(props: TableBasicProps) {
-  const state = useSelector((state : any) => state.requeriment)
+  const state = useSelector((state : RootState) => state.requeriment)
 
   const dispatch = useDispatch()
 
