@@ -22,10 +22,6 @@ const LoginPage: NextPage<LoginPageProps> = (props) => {
 
     try{
 
-      await axios.post(`${process.env.NEXT_PUBLIC_API_HOST}/login`, {
-        email,
-        password
-      });
 
       router.push('/dashboard')
 
