@@ -76,7 +76,7 @@ const Footer: React.FC<FooterProps> = (props) => {
       <p className="text-center text-sm text-gray-500 my-10">
         &copy; 2022{' '}
         <a href="" className="hover:underline" target="_blank">
-          Equilibrium Web
+          ConectePET
         </a>
         . Todos os direitos reservados.
       </p>
