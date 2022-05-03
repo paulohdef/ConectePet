@@ -8,6 +8,7 @@ import {
   setSelectedUsers,
 } from '../../store'
 import { useEffect } from 'react'
+import { RootState } from '@/src/store/reducers'
 
 interface TableBasicProps {
   users?: User[]
@@ -19,7 +20,7 @@ const formatDate = (value: string) => {
 
 export default function TableBasicUsers(props: TableBasicProps) {
 
-  const state = useSelector((state) => state.user)
+  const state = useSelector((state : RootState) => state.user)
 
 
   const dispatch = useDispatch()
