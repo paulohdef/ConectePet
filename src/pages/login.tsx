@@ -71,7 +71,7 @@ const LoginPage: NextPage<LoginPageProps> = (props) => {
               </div>
               <div>
                 <label className="text-sm font-medium text-gray-900 block mb-2">
-                  Sua senha
+                  Sua Senha
                 </label>
                 <input
                   type="password"
