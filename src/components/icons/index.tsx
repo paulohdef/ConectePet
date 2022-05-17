@@ -131,7 +131,7 @@ export const IconeUser = (
   </svg>
 )
 
-export const IconeArquivos = (
+export const IconeVacinas = (
   <svg
     className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
     fill="currentColor"
@@ -155,7 +155,7 @@ export const IconeDashboard = (
   </svg>
 )
 
-export const IconeAtendimento = (
+export const IconeHome = (
   <svg
     className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
     fill="currentColor"

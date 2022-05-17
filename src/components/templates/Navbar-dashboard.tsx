@@ -1,6 +1,10 @@
 // @flow
 import * as React from 'react'
 import { IconeSearch } from '../icons'
+import conecteLogo from '../../../public/images/logoConecte.png'
+import Image from 'next/image'
+
+
 
 interface NavbarProps {}
 
@@ -36,30 +40,9 @@ const NavbarDashboard: React.FC<NavbarProps> = (props) => {
               </svg>
             </button>
             <a className="text-xl font-bold flex items-center lg:ml-2.5">
-              <img
-                src="images/logo_sigfas.png"
-                className="h-10 mr-2"
-                alt="Windster Logo"
-              />
-              {/* <span className="text-3xl self-center whitespace-nowrap ">
-                Sigfas
-              </span> */}
+            <h1>ConectePET</h1>
             </a>
-            {/* <form action="#" method="GET" className="hidden lg:block lg:pl-32">
-              <label className="sr-only">Consulta associado</label>
-              <div className="mt-1 relative lg:w-64">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  {IconeSearch}
-                </div>
-                <input
-                  type="text"
-                  name="email"
-                  id="topbar-search"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-800 focus:border-blue-800 block w-full pl-10 p-2.5"
-                  placeholder="Informe o associado"
-                />
-              </div>
-            </form> */}
+
           </div>
           <div className="flex items-center">
             {/* <!-- Search mobile --> */}
@@ -81,21 +64,7 @@ const NavbarDashboard: React.FC<NavbarProps> = (props) => {
             </button>
             <div className="hidden lg:flex items-center">
               <div className="-mb-1">
-                <a
-                  className="github-button"
-                  href="https://github.com/themesberg/windster-tailwind-css-dashboard"
-                  data-color-scheme="no-preference: dark; light: light; dark: light;"
-                  data-icon="octicon-star"
-                  data-size="large"
-                  data-show-count="true"
-                  aria-label="Star themesberg/windster-tailwind-css-dashboard on GitHub"
-                >
-                  <img
-                    src="images/logo-eq-wp.png"
-                    className="h-8 mr-2"
-                    alt="Windster Logo"
-                  />
-                </a>
+
               </div>
             </div>
           </div>
