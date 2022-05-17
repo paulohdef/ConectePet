@@ -27,7 +27,7 @@ const cadastroPage: NextPage<cadastroPageProps> = (props) => {
 
             <div>
               <section className="max-w-4xl p-6 mx-auto bg-gray-400 rounded-md shadow-md dark:bg-gray-800 mt-20">
-                <h1 className="text-xl font-bold text-white capitalize dark:text-white">Cadastro do PET</h1>
+                <h1 className="text-xl font-bold justify-center flex text-white dark:text-white">Cadastro do PET</h1>
                 <form>
                   <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
 
@@ -59,12 +59,12 @@ const cadastroPage: NextPage<cadastroPageProps> = (props) => {
                   </div>
                   <div className="flex justify-center mt-6">
 
-                    <button className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-grey-700 focus:outline-none focus:bg-gray-600">Cadastrar</button>
+                    <button className="px-6 py-2 leading-5 text-black transition-colors duration-200 transform bg-white rounded-md hover:bg-grey-700 focus:outline-none focus:bg-gray-600">Cadastrar</button>
 
                   </div>
                   <div className="flex justify-center mt-6">
                     <Link href="/dashboard">
-                    <button className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-black rounded-md hover:bg-grey-700 focus:outline-none focus:bg-gray-600">Início</button>
+                    <button className="px-6 py-2 leading-5 text-black transition-colors duration-200 transform bg-white rounded-md hover:bg-grey-700 focus:outline-none focus:bg-gray-600">Início</button>
                     </Link>
 
                   </div>
