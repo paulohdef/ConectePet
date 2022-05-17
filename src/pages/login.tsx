@@ -38,7 +38,7 @@ const LoginPage: NextPage<LoginPageProps> = (props) => {
   return (
     <>
       <Head>
-        <title>SIGPET Teste-branch</title>
+        <title>SIGPET</title>
       </Head>
       <div className="mx-auto md:h-screen flex flex-col justify-center items-center px-6 pt-8 pt:mt-0">
         <a className="text-2xl font-semibold flex justify-center items-center mb-4 lg:mb-5">
