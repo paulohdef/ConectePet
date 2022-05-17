@@ -53,7 +53,7 @@ const LoginPage: NextPage<LoginPageProps> = (props) => {
         <div className="bg-white shadow rounded-lg md:mt-0 w-full sm:max-w-screen-sm xl:p-0">
           <div className="p-6 sm:p-8 lg:p-16 space-y-8">
             <h2 className="text-2xl lg:text-3xl font-bold text-amber-700">
-              Entrar no sistema
+              Entrar no Sistema
             </h2>
             <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <div>
