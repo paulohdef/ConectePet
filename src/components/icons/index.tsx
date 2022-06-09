@@ -234,6 +234,7 @@ export function CheckSVG() {
   )
 }
 
+
 export function CloseSVG() {
   return (
     <svg

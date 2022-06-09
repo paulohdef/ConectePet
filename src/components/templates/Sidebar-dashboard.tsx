@@ -48,8 +48,8 @@ const SidebarDashboard: React.FC<SidebarProps> = (props) => {
                 />
 
                 <MenuItem
-                  url="/config"
-                  texto="Configurações"
+                  url="/tutores"
+                  texto="Tutores"
                   icone={IconeLogin}
                 />
 
