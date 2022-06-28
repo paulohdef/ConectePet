@@ -16,3 +16,12 @@ export interface Vacinas {
     fornecedor: string;
     atendeGenero: string;
 }
+
+export interface Hospedagem { 
+    id: number 
+    id_requerimento: number
+    hotel_hospedagem: string
+    data_entrada: Date
+    data_saida: Date
+    tipo_tratamento: string 
+  }  
