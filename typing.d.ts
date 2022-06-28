@@ -7,3 +7,12 @@ export interface Tutores {
     cep: string;
     
 }
+
+export interface Vacinas {
+    id: string;
+    nome: string;
+    dataInicio: string;
+    dataFim: string;
+    fornecedor: string;
+    atendeGenero: string;
+}
