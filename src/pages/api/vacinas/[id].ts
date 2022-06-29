@@ -19,14 +19,14 @@ function vacinasHandle(req: any, res: any) {
     case "GET": {
       return getVacinas();
     }
-    case "PATCH":
+    case "PUT":
       return updateVacinas(req.body);
 
     case "DELETE":
       return deleteVacinas();
 
     default:
-      res.setHeader("Allow", ["GET", "PATCH", "DELETE"]);
+      res.setHeader("Allow", ["GET", "PUT", "DELETE"]);
       return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 

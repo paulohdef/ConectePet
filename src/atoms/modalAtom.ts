@@ -9,13 +9,18 @@ export const modalState = atom({
 })
 
 export const modalVacinasState = atom({
-  key: 'vacinasState',
+  key: 'modalVacinasState',
   default: false,
 })
 
 export const modalTutoresState = atom({
   key: 'tutoresState',
   default: false,
+})
+
+export const vacinasState = atom<Vacinas | null>({
+  key: 'vacinasState',
+  default: null,
 })
 
 
