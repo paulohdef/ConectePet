@@ -7,14 +7,6 @@ import { Vacinas } from "@/typing";
 function vacinasHandle(req: any, res: any) {
   const id = req.query.id as string;
 
-  console.log(`pessoa id ${id}`);
-
-  const headers = {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    // "Authorization": "Bearer " + user.token,
-  };
-
   switch (req.method) {
     case "GET": {
       return getVacinas();
@@ -24,6 +16,7 @@ function vacinasHandle(req: any, res: any) {
 
     case "DELETE":
       return deleteVacinas();
+      // return res.status(200).send();
 
     default:
       res.setHeader("Allow", ["GET", "PUT", "DELETE"]);
@@ -33,10 +26,7 @@ function vacinasHandle(req: any, res: any) {
   async function getVacinas() {
     try {
       const { data } = await axios.get(
-        `${process.env.NEST_API_HOST}/vacinas/${id}`,
-        {
-          headers: headers,
-        }
+        `${process.env.NEST_API_HOST}/vacinas/${id}`
       );
 
       console.log("retorno do id", data);
@@ -55,13 +45,14 @@ function vacinasHandle(req: any, res: any) {
     const { id, nome, dataInicio, dataFim, fornecedor, atendeGenero } = body;
 
     try {
-      const { data } = await axios.put(
-        `${process.env.NEST_API_HOST}/vacinas`,
-        { id, nome, dataInicio, dataFim, fornecedor, atendeGenero },
-        {
-          headers: headers,
-        }
-      );
+      const { data } = await axios.put(`${process.env.NEST_API_HOST}/vacinas`, {
+        id,
+        nome,
+        dataInicio,
+        dataFim,
+        fornecedor,
+        atendeGenero,
+      });
 
       console.log("retorno do id", data);
       //res.status(200).json(data.centro_custo);
@@ -78,14 +69,10 @@ function vacinasHandle(req: any, res: any) {
   async function deleteVacinas() {
     try {
       const { data } = await axios.delete(
-        `${process.env.NEST_API_HOST}/centro-custo/${id}`,
-        {
-          headers: headers,
-        }
+        `${process.env.NEST_API_HOST}/vacinas/${id}`
       );
 
-      console.log("retorno do id", data.centro_custo);
-      res.status(200).json(data.centro_custo);
+      res.status(200).send();
     } catch (e) {
       console.error(e);
       if (axios.isAxiosError(e)) {

@@ -11,7 +11,7 @@ import { Vacinas } from "@/typing";
 import axios from "axios";
 
 function ModalVacinas(props : any) {
-  const idVacina = props.id;
+  const idVacina = props.vacinaData.id;
   const vacinaData = props.vacinaData;
   
   const [showModal, setShowModal] = useRecoilState(modalVacinasState);

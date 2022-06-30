@@ -5,12 +5,20 @@ import { modalState, modalVacinasState } from "@/src/atoms/modalAtom";
 import { PencilSVG, TrashSVG } from "../../../../components/icons";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import ModalVacinas from "@/src/components/modal/ModalVacinas";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 // import Pessoa from '@/src/core/Pessoa'
 // import { CentroCusto } from '@/typings'
 
 interface TableVacinasProps {
   vacinasData: Vacinas[];
+}
+
+async function deleteVacina(id: any) {
+  await axios
+    .delete(`${process.env.NEXT_PUBLIC_API_HOST}/vacinas/${id}`)
+    .then((err) => console.log(err));
+  return console.log(id);
 }
 
 const formatDate = (value: string) => {
@@ -20,8 +28,8 @@ const formatDate = (value: string) => {
 export default function TableVacinas({ vacinasData }: TableVacinasProps) {
   const showModalVacinas = useRecoilValue(modalVacinasState);
   const setShowModal = useSetRecoilState(modalVacinasState);
-  const [vacinaId, setVacinaId] = useState(null)
-  const [vacina, setVacina] = useState({})
+
+  const [vacina, setVacina] = useState({});
 
   return (
     <>
@@ -61,11 +69,26 @@ export default function TableVacinas({ vacinasData }: TableVacinasProps) {
                     className="btn btn__compact btn__delete"
                     onClick={() => {
                       setShowModal(true);
-                      setVacinaId(id);
-                      setVacina({id, nome, dataInicio, dataFim, fornecedor, atendeGenero});
+
+                      setVacina({
+                        id,
+                        nome,
+                        dataInicio,
+                        dataFim,
+                        fornecedor,
+                        atendeGenero,
+                      });
                     }}
                   >
                     <PencilSVG />
+                  </button>
+                  <button
+                    className="btn btn__compact btn__delete"
+                    onClick={() => {
+                      deleteVacina(id);
+                    }}
+                  >
+                    <TrashSVG />
                   </button>
                 </td>
               </tr>
@@ -73,7 +96,7 @@ export default function TableVacinas({ vacinasData }: TableVacinasProps) {
           )}
         </tbody>
       </table>
-      {showModalVacinas && <ModalVacinas id={vacinaId} vacinaData={vacina}/>}
+      {showModalVacinas && <ModalVacinas vacinaData={vacina} />}
     </>
   );
 }

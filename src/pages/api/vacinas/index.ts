@@ -22,8 +22,8 @@ function vacinasHandle(req: any, res: any) {
 
       // console.log(`meu retorno ${JSON.stringify(data)}`)
 
-      console.log("fez o get");
-      console.log(data);
+      //console.log("fez o get");
+      //console.log(data);
 
       res.status(200).json(data);
     } catch (e) {
@@ -49,8 +49,8 @@ function vacinasHandle(req: any, res: any) {
 
       // console.log(`meu retorno ${JSON.stringify(data)}`)
 
-      console.log("fez o get");
-      console.log(data);
+      //console.log("fez o get");
+      //console.log(data);
 
       res.status(200).json(data);
     } catch (e) {
