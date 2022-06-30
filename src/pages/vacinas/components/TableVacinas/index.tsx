@@ -62,8 +62,8 @@ export default function TableVacinas({ vacinasData }: TableVacinasProps) {
                 <td className={` text-left text-xs  p-2`}>{nome}</td>
                 <td className={` text-left text-xs  p-2`}>{dataInicio} </td>
                 <td className={` text-left text-xs  p-2`}> {dataFim} </td>
-                <td className={` text-left text-xs  p-2`}> {fornecedor} </td>
                 <td className={` text-left text-xs  p-2`}> {atendeGenero} </td>
+                <td className={` text-left text-xs  p-2`}> {fornecedor} </td>
 
                 <td>
                   <button
