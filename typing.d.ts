@@ -5,6 +5,7 @@ export interface Tutores {
     celular: string;
     dataNascimento: string;
     cep: string;
+    password:string;
     
 }
 

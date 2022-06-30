@@ -94,14 +94,10 @@ function tutoresHandle(req: any, res: any) {
 
    async function deleteTutores() {  
     try { 
-        const { data } = await axios.delete(`${process.env.NEST_API_HOST}/centro-custo/${id}`, 
-        {
-        headers: headers
-        }
+        const { data } = await axios.delete(`${process.env.NEST_API_HOST}/users/${id}`, 
       );
-  
-      console.log('retorno do id', data.centro_custo) 
-      res.status(200).json(data.centro_custo);
+
+      res.status(200).send();
   
     } catch (e) {
       console.error(e);

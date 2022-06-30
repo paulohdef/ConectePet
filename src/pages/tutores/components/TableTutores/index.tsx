@@ -2,9 +2,11 @@ import moment from "moment";
 import Link from "next/link";
 import { Tutores } from "@/typing";
 import { PencilSVG, TrashSVG } from "../../../../components/icons";
-import { modalTutoresState } from "@/src/atoms/modalAtom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { modalTutoresState, typeRequestTutores } from "@/src/atoms/modalAtom";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import ModalTutores from "@/src/components/modal/ModalTutores";
+import { useState } from "react";
+import axios from "axios";
 // import Pessoa from '@/src/core/Pessoa'
 // import { CentroCusto } from '@/typings'
 
@@ -15,10 +17,20 @@ interface TableTutoresProps {
 const formatDate = (value: string) => {
   return moment().format("DD/MM/YYYY"); //moment(value).format(moment.HTML5_FMT.DATE)
 };
+async function deleteTutor(id: any) {
+  await axios
+    .delete(`${process.env.NEXT_PUBLIC_API_HOST}/tutores/${id}`)
+    .then((err) => console.log(err));
+  return console.log(id);
+}
 
 export default function TableTutores({ tutoresData }: TableTutoresProps) {
   const showModalVacinas = useRecoilValue(modalTutoresState);
   const setShowModal = useSetRecoilState(modalTutoresState);
+  const [typeRequestTutor, SetTypeRequestTutor] =
+    useRecoilState(typeRequestTutores);
+
+  const [tutor, setTutor] = useState({});
 
   return (
     <>
@@ -40,7 +52,7 @@ export default function TableTutores({ tutoresData }: TableTutoresProps) {
         <tbody className="table__body">
           {tutoresData?.map(
             (
-              { id, nome, email, celular, dataNascimento, cep }: any,
+              { id, nome, email, celular, dataNascimento, cep, password }: any,
               i: any
             ) => (
               <tr
@@ -60,11 +72,28 @@ export default function TableTutores({ tutoresData }: TableTutoresProps) {
                   <button
                     className="btn btn__compact btn__delete"
                     onClick={() => {
-                      // setCurrentDependent(props.dependente[i])
+                      setTutor({
+                        id,
+                        nome,
+                        email,
+                        celular,
+                        dataNascimento,
+                        cep,
+                        password
+                      });
+                      SetTypeRequestTutor("PUT");
                       setShowModal(true);
                     }}
                   >
                     <PencilSVG />
+                  </button>
+                  <button
+                    className="btn btn__compact btn__delete"
+                    onClick={() => {
+                      deleteTutor(id);
+                    }}
+                  >
+                    <TrashSVG />
                   </button>
                 </td>
               </tr>
@@ -72,7 +101,7 @@ export default function TableTutores({ tutoresData }: TableTutoresProps) {
           )}
         </tbody>
       </table>
-      {showModalVacinas && <ModalTutores />}
+      {showModalVacinas && <ModalTutores tutorData={tutor} />}
     </>
   );
 }

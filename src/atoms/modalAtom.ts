@@ -28,6 +28,11 @@ export const typeRequestVacinas = atom({
   default: "",
 })
 
+export const typeRequestTutores = atom({
+  key: 'typeRequestTutores',
+  default: "",
+})
+
 
 
 
