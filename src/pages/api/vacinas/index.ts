@@ -10,7 +10,8 @@ function vacinasHandle(req: any, res: any) {
     }
     case "PUT":
       return updateUsers(req.body);
-
+    case "POST":
+      return createUser(req.body);
     default:
       res.setHeader("Allow", ["GET", "POST"]);
       return res.status(405).end(`Method ${req.method} Not Allowed`);
@@ -63,37 +64,35 @@ function vacinasHandle(req: any, res: any) {
     }
   }
 
-  //   async function createUser(body: CentroCusto) {
-  //     const { nome, sigla, tipo, codigo } = body;
+  async function createUser(data: any) {
+    const { nome, dataInicio, dataFim, fornecedor, atendeGenero } = data;
+    try {
+      const { data } = await axios.post(
+        `${process.env.NEST_API_HOST}/vacinas`,
+        {
+          nome,
+          dataInicio,
+          dataFim,
+          fornecedor,
+          atendeGenero,
+        }
+      );
 
-  //     console.log(" retorno json", JSON.stringify(body));
+      // console.log(`meu retorno ${JSON.stringify(data)}`)
 
-  //     try {
-  //       const headers = {
-  //         "Content-Type": "application/json",
-  //         "Access-Control-Allow-Origin": "*",
-  //         // Authorization: "Bearer " + user.token(),
-  //       };
+      //console.log("fez o get");
+      //console.log(data);
 
-  //       const { data } = await axios.post(
-  //         `${process.env.NEST_API_HOST}/centro-custo`,
-  //         {
-  //           nome,
-  //           sigla,
-  //           codigo,
-  //           tipo,
-  //         },
-  //         { headers: headers }
-  //       );
-
-  //       console.log(`resposta do servidor ${data}`);
-
-  //       res.status(200).json(data);
-  //     } catch (e) {
-  //       console.error(e);
-  //       res.status(401).json({ message: "Unauthenticated" });
-  //     }
-  //   }
+      res.status(200).json(data);
+    } catch (e) {
+      console.error(e);
+      if (axios.isAxiosError(e)) {
+        res.status(e.response!.status).json(e.response?.data);
+      } else {
+        res.status(500).json({ message: "Ocorreu um erro interno" });
+      }
+    }
+  }
 }
 
 export default vacinasHandle;

@@ -10,6 +10,8 @@ import Router from "next/router";
 // import TableCentroCusto from "@/src/components/TableCentroCusto";
 import { Tutores, Vacinas } from "@/typing";
 import TableVacinas from "./components/TableVacinas";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { modalVacinasState, typeRequestVacinas } from "@/src/atoms/modalAtom";
 
 interface VacinasProps {
   listVacinas: Vacinas[];
@@ -17,9 +19,7 @@ interface VacinasProps {
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
-const VacinasPage: NextPage<VacinasProps> = ({
-  listVacinas,
-}: VacinasProps) => {
+const VacinasPage: NextPage<VacinasProps> = ({ listVacinas }: VacinasProps) => {
   const { data, error } = useSWR(
     `${process.env.NEXT_PUBLIC_API_HOST}/vacinas`,
     fetcher,
@@ -28,18 +28,36 @@ const VacinasPage: NextPage<VacinasProps> = ({
       refreshInterval: 100,
       onError: (error) => {
         console.log(error);
-        
       },
     }
   );
+
+  const setShowModal = useSetRecoilState(modalVacinasState);
+  const [typeRequestVac, SetTypeRequestVac] = useRecoilState(typeRequestVacinas);
+
+
 
   return (
     <div>
       <Layout titulo="Dashboar" subTitulo="Administrar suas informações">
         <div className="pt-4 px-4">
-          <div className="flex flex-row mb-4">
-            <div className="w-full">
-            </div>
+          <div className="flex w-full flex-row mb-4 justify-start">
+            <button
+              className={
+                "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-gray-400 m-5 hover:bg-gray-600"
+              }
+              data-toggle="tab"
+              role="tablist"
+              onClick={() => {
+                setShowModal(true);
+                SetTypeRequestVac("POST");
+              }}
+              
+            >
+              <i className="fas fa-space-shuttle text-base mr-1"></i> CADASTRAR
+              VACINA
+            </button>
+            
           </div>
 
           <div className="w-full grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
@@ -54,4 +72,3 @@ const VacinasPage: NextPage<VacinasProps> = ({
 };
 
 export default VacinasPage;
-

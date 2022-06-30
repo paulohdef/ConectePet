@@ -1,9 +1,9 @@
 import moment from "moment";
 import Link from "next/link";
 import { Tutores, Vacinas } from "@/typing";
-import { modalState, modalVacinasState } from "@/src/atoms/modalAtom";
+import { modalState, modalVacinasState, typeRequestVacinas } from "@/src/atoms/modalAtom";
 import { PencilSVG, TrashSVG } from "../../../../components/icons";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import ModalVacinas from "@/src/components/modal/ModalVacinas";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -28,6 +28,7 @@ const formatDate = (value: string) => {
 export default function TableVacinas({ vacinasData }: TableVacinasProps) {
   const showModalVacinas = useRecoilValue(modalVacinasState);
   const setShowModal = useSetRecoilState(modalVacinasState);
+  const [typeRequestVac, SetTypeRequestVac] = useRecoilState(typeRequestVacinas);
 
   const [vacina, setVacina] = useState({});
 
@@ -78,6 +79,7 @@ export default function TableVacinas({ vacinasData }: TableVacinasProps) {
                         fornecedor,
                         atendeGenero,
                       });
+                      SetTypeRequestVac("PUT");
                     }}
                   >
                     <PencilSVG />

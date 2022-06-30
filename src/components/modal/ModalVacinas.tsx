@@ -1,7 +1,11 @@
-import { modalVacinasState, vacinasState } from "@/src/atoms/modalAtom";
+import {
+  modalVacinasState,
+  typeRequestVacinas,
+  vacinasState,
+} from "@/src/atoms/modalAtom";
 import MuiModal from "@mui/material/Modal";
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import Box from "@mui/material/Box";
 
@@ -10,12 +14,13 @@ import { useForm } from "react-hook-form";
 import { Vacinas } from "@/typing";
 import axios from "axios";
 
-function ModalVacinas(props : any) {
+function ModalVacinas(props: any) {
   const idVacina = props.vacinaData.id;
   const vacinaData = props.vacinaData;
-  
+
   const [showModal, setShowModal] = useRecoilState(modalVacinasState);
   const [vacinas, setVacinas] = useRecoilState(vacinasState);
+  const typeRequestVac = useRecoilValue(typeRequestVacinas);
 
   useEffect(() => {
     if (!vacinas) return;
@@ -28,7 +33,24 @@ function ModalVacinas(props : any) {
     setVacinas(null);
   };
 
-  const defaultValues = vacinaData;
+  let requestFunction: any;
+
+  let defaultValues;
+
+  switch (typeRequestVac) {
+    case "POST": {
+      requestFunction = postVacinas
+      break;
+    }
+    case "PUT": {
+      defaultValues = vacinaData;
+      requestFunction = updateVacinas
+      break;
+    }
+    default: {
+      console.log(typeRequestVac);
+    }
+  }
 
   const { register, handleSubmit, formState } = useForm<Vacinas>({
     defaultValues: {
@@ -43,9 +65,9 @@ function ModalVacinas(props : any) {
 
   async function onSubmit(data: Vacinas, e: any) {
     e.preventDefault();
-    data.id = idVacina
+    data.id = idVacina;
     console.log(data);
-    updateVacinas(data);
+    requestFunction(data);
     setShowModal(false);
   }
 
@@ -53,6 +75,21 @@ function ModalVacinas(props : any) {
     const { id, nome, dataInicio, dataFim, fornecedor, atendeGenero } = data;
     await axios.put(`${process.env.NEXT_PUBLIC_API_HOST}/vacinas`, {
       id,
+      nome,
+      dataInicio,
+      dataFim,
+      fornecedor,
+      atendeGenero,
+    });
+    // .then( () => {
+    //   alertService.success('Vacina alterada.', {
+    //     keepAfterRouteChange: true,
+    //   })
+    // })
+  }
+  async function postVacinas(data: any) {
+    const { nome, dataInicio, dataFim, fornecedor, atendeGenero } = data;
+    await axios.post(`${process.env.NEXT_PUBLIC_API_HOST}/vacinas`, {
       nome,
       dataInicio,
       dataFim,
@@ -127,7 +164,6 @@ function ModalVacinas(props : any) {
                             {...register("dataInicio")}
                             required
                           />
-
                         </div>
 
                         <div>

@@ -23,6 +23,11 @@ export const vacinasState = atom<Vacinas | null>({
   default: null,
 })
 
+export const typeRequestVacinas = atom({
+  key: 'typeRequestVacinas',
+  default: "",
+})
+
 
 
 
