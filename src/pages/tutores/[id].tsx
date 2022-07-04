@@ -232,11 +232,7 @@ export const getServerSideProps: GetServerSideProps = async (
 
   const [{ data: users }, { data: user }] = await Promise.all([
     await axios.get(`${process.env.NEXT_PUBLIC_API_HOST}/tutores/${id}`),
-    await axios.get(`${process.env.NEXT_PUBLIC_API_HOST}/tutores/pets/${id}`, {
-      headers: {
-        cookie: context.req.headers.cookie as string,
-      },
-    }),
+    await axios.get(`${process.env.NEXT_PUBLIC_API_HOST}/tutores/pets/${id}`),
   ]);
 
   return {
