@@ -26,7 +26,7 @@ const formatDate = (value: string) => {
 };
 async function deletePet(id: any) {
   await axios
-    .delete(`${process.env.NEXT_PUBLIC_API_HOST}/tutores/${id}`)
+    .delete(`${process.env.NEXT_PUBLIC_API_HOST}/tutores/pets/${id}`)
     .then((err) => console.log(err));
   return console.log(id);
 }

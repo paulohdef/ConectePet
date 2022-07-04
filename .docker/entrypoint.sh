@@ -5,6 +5,6 @@ if [ ! -f ".env"]; then
 fi
 
 npm install
-npm run build
-npm run start
-# npm run dev
+# npm run build
+# npm run start
+npm run dev

@@ -16,7 +16,7 @@ function petsHandle(req: any, res: any) {
       return updatePets(req.body);
     }
     case "DELETE": {
-      return getPets();
+      return deletePets();
     }
 
     default:
@@ -67,10 +67,10 @@ function petsHandle(req: any, res: any) {
     }
   }
 
-  async function deleteVacinas() {
+  async function deletePets() {
     try {
       const { data } = await axios.delete(
-        `${process.env.NEST_API_HOST}/vacinas/${id}`
+        `${process.env.NEST_API_HOST}/pets/${id}`
       );
 
       res.status(200).send();
