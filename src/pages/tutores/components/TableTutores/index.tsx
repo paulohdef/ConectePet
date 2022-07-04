@@ -1,7 +1,7 @@
 import moment from "moment";
 import Link from "next/link";
 import { Tutores } from "@/typing";
-import { PencilSVG, TrashSVG } from "../../../../components/icons";
+import { PencilSVG, TrashSVG, IconeUsers } from "../../../../components/icons";
 import { modalTutoresState, typeRequestTutores } from "@/src/atoms/modalAtom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import ModalTutores from "@/src/components/modal/ModalTutores";
@@ -70,7 +70,7 @@ export default function TableTutores({ tutoresData }: TableTutoresProps) {
 
                 <td>
                   <button
-                    className="btn btn__compact btn__delete"
+                    className="btn btn__compact btn__delete m-3"
                     onClick={() => {
                       setTutor({
                         id,
@@ -79,7 +79,7 @@ export default function TableTutores({ tutoresData }: TableTutoresProps) {
                         celular,
                         dataNascimento,
                         cep,
-                        password
+                        password,
                       });
                       SetTypeRequestTutor("PUT");
                       setShowModal(true);
@@ -88,13 +88,21 @@ export default function TableTutores({ tutoresData }: TableTutoresProps) {
                     <PencilSVG />
                   </button>
                   <button
-                    className="btn btn__compact btn__delete"
+                    className="btn btn__compact btn__delete m-3"
                     onClick={() => {
                       deleteTutor(id);
                     }}
                   >
                     <TrashSVG />
                   </button>
+                  <Link href={`/tutores/${id}`} passHref>
+                    <button
+                      className="btn btn__compact btn__delete m-3"
+                      onClick={() => {}}
+                    >
+                      <IconeUsers />
+                    </button>
+                  </Link>
                 </td>
               </tr>
             )

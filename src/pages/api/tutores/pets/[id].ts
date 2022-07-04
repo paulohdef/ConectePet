@@ -1,35 +1,37 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
-import { Vacinas } from "@/typing";
+import { Pets, Tutores } from "@/typing";
+// import { withIronSessionApiRoute } from "iron-session/next";
+// import ironConfig from "../../../utils/iron-config";
 
-function vacinasHandle(req: any, res: any) {
+function petsHandle(req: any, res: any) {
   const id = req.query.id as string;
-
-  console.log(id);
 
   switch (req.method) {
     case "GET": {
-      return getVacinas();
+      return getPets();
     }
-    case "PUT":
-      return updateVacinas(req.body);
-
-    case "DELETE":
-      return deleteVacinas();
+    case "PUT": {
+      console.log(req.body);
+      return updatePets(req.body);
+    }
+    case "DELETE": {
+      return getPets();
+    }
 
     default:
-      res.setHeader("Allow", ["GET", "PUT", "DELETE"]);
+      res.setHeader("Allow", ["GET, PUT, DELETE"]);
       return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
-  async function getVacinas() {
+  async function getPets() {
     try {
       const { data } = await axios.get(
-        `${process.env.NEST_API_HOST}/vacinas/${id}`
+        `${process.env.NEST_API_HOST}/users/tutores/${id}`
       );
 
       console.log("retorno do id", data);
-      //res.status(200).json(data.centro_custo);
+      res.status(200).json(data);
     } catch (e) {
       console.error(e);
       if (axios.isAxiosError(e)) {
@@ -39,22 +41,22 @@ function vacinasHandle(req: any, res: any) {
       }
     }
   }
-
-  async function updateVacinas(body: Vacinas) {
-    const { id, nome, dataInicio, dataFim, fornecedor, atendeGenero } = body;
+  async function updatePets(body: Pets) {
+    const { id, nome, raca, genero, idade, sexo, castrado } = body;
 
     try {
-      const { data } = await axios.put(`${process.env.NEST_API_HOST}/vacinas`, {
+      const { data } = await axios.put(`${process.env.NEST_API_HOST}/pets`, {
         id,
         nome,
-        dataInicio,
-        dataFim,
-        fornecedor,
-        atendeGenero,
+        raca,
+        genero,
+        idade,
+        sexo,
+        castrado,
       });
 
       console.log("retorno do id", data);
-      //res.status(200).json(data.centro_custo);
+      res.status(200).send();
     } catch (e) {
       console.error(e);
       if (axios.isAxiosError(e)) {
@@ -82,4 +84,4 @@ function vacinasHandle(req: any, res: any) {
     }
   }
 }
-export default vacinasHandle;
+export default petsHandle;
