@@ -2,14 +2,14 @@ import { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import { Vacinas } from "@/typing";
 
-function vacinasHandle(req: any, res: any) {
+function vacinasOfPetHandle(req: any, res: any) {
   const id = req.query.id as string;
 
   console.log(id);
 
   switch (req.method) {
     case "GET": {
-      return getPets();
+      return getVacinasOfPet();
     }
     case "PUT":
       return updateVacinas(req.body);
@@ -25,13 +25,12 @@ function vacinasHandle(req: any, res: any) {
       return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
-  async function getPets() {
+  async function getVacinasOfPet() {
     try {
       const { data } = await axios.get(
-        `${process.env.NEST_API_HOST}/pets/${id}`
+        `${process.env.NEST_API_HOST}/pets/vacinas/${id}`
       );
-
-      res.status(200).json(data);
+      res.status(200).json(data.vacinas);
     } catch (e) {
       console.error(e);
       if (axios.isAxiosError(e)) {
@@ -106,4 +105,4 @@ function vacinasHandle(req: any, res: any) {
     }
   }
 }
-export default vacinasHandle;
+export default vacinasOfPetHandle;

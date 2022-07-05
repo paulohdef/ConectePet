@@ -14,31 +14,27 @@ import Image from "next/image";
 // import TablePets from "./components/TablePets";
 import useSWR from "swr";
 import TableVacinas from "../vacinas/components/TableVacinas";
+import TablePetVacinas from "./components/TablePetVacinas";
+import TableHistVacinas from "./components/TableHistVacinas";
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const PetInfoPage = (props: any) => {
   const pets = props?.pet;
-  console.log(props);
-  const router = useRouter();
   const id = props?.id;
   const vacinasData = props?.vacinas;
 
-  //   const { data, error } = useSWR(
-  //     `${process.env.NEXT_PUBLIC_API_HOST}/tutores/pets/${id}`,
-  //     fetcher,
-  //     {
-  //       fallbackData: pets,
-  //       refreshInterval: 100,
-  //       onError: (error) => {
-  //         console.log(error);
-  //       },
-  //     }
-  //   );
-  //   const pets = data.pets;
-  //   const setShowModal = useSetRecoilState(modalPetsState);
-  //   const [typeRequestTutor, SetTypeRequestTutor] =
-  //     useRecoilState(typeRequestPets);
+  const { data, error } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_HOST}/pets/vacinas/${id}`,
+    fetcher,
+    {
+      fallbackData: vacinasData,
+      refreshInterval: 100,
+      onError: (error) => {
+        console.log(error);
+      },
+    }
+  );
 
   const [openTab, setOpenTab] = useState(1);
   return (
@@ -80,7 +76,7 @@ const PetInfoPage = (props: any) => {
                       role="tablist"
                     >
                       <i className="fas fa-space-shuttle text-base mr-1"></i>{" "}
-                      VACINAS
+                      VACINAS DISPONÍVEIS
                     </a>
                   </li>
                   <li className="-mb-px mr-2 last:mr-0 flex-auto text-center bg-gray-100">
@@ -99,7 +95,8 @@ const PetInfoPage = (props: any) => {
                       href="#link2"
                       role="tablist"
                     >
-                      <i className="fas fa-cog text-base mr-1"></i> OPÇÃO 1
+                      <i className="fas fa-cog text-base mr-1"></i> HISTÓRICO DE
+                      VACINAS
                     </a>
                   </li>
 
@@ -172,18 +169,31 @@ const PetInfoPage = (props: any) => {
             <div className="lg:w-8/12 pr-4 py-4">
               <div className="tab-content tab-space">
                 <div className={openTab === 1 ? "block" : "hidden"} id="link1">
+                  <div className="flex flex-col border gap-2 border-b-2 m-5 border-gray-100">
+                    <div className="flex flex-row justify-start px-1">
+                      <p className="text-principal p-2 font-semibold  text-base ">
+                        VACINAS OFERTADAS
+                      </p>
+                    </div>
+                  </div>
+
                   <div className="flex flex-col bg-white border gap-2  pb-10 border-b-2 m-5 border-gray-100">
                     <div className="flex flex-row justify-start px-1">
-                      <TableVacinas vacinasData={vacinasData} />
+                      <TablePetVacinas vacinasData={vacinasData} idPet={id} />
                     </div>
                   </div>
                 </div>
                 <div className={openTab === 2 ? "block" : "hidden"} id="link2">
-                  <div className="flex flex-col bg-white border gap-2  pb-10 border-b-2 border-gray-100">
+                  <div className="flex flex-col border gap-2 border-b-2 m-5 border-gray-100">
                     <div className="flex flex-row justify-start px-1">
-                      <p className="text-principal  p-2 font-semibold  text-base ">
-                        OPÇÃO 1
+                      <p className="text-principal p-2 font-semibold  text-base ">
+                        HISTÓRICO DE VACINAÇÃO
                       </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col bg-white border gap-2  pb-10 border-b-2 m-5 border-gray-100">
+                    <div className="flex flex-row justify-start px-1">
+                      <TableHistVacinas vacinasData={data} />
                     </div>
                   </div>
                 </div>
