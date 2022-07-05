@@ -50,7 +50,7 @@ export default function gerarCertificadoVacina(data: any, pets: any) {
           ],
           [
             {
-              text: `Gênero: ${pets.genero}`,
+              text: `Peso: 10 kg`,
               fontSize: 12,
               margin: [0, 5, 0, 5],
             },
