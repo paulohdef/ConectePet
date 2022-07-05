@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react'
+import * as React from "react";
 import {
   IconeAjuda,
   IconeVacinas,
@@ -10,8 +10,8 @@ import {
   IconeLogout,
   IconeSearch,
   IconeUser,
-} from '../icons'
-import MenuItem from './MenuItem'
+} from "../icons";
+import MenuItem from "./MenuItem";
 
 interface SidebarProps {}
 
@@ -26,32 +26,11 @@ const SidebarDashboard: React.FC<SidebarProps> = (props) => {
           <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
             <div className="flex-1 px-3 bg-white divide-y space-y-1">
               <ul className="space-y-2 pb-2">
+                <MenuItem url="/dashboard" texto="Início" icone={IconeHome} />
 
+                <MenuItem url="/vacinas" texto="Vacinas" icone={IconeVacinas} />
 
-                <MenuItem
-                  url="/dashboard"
-                  texto="Início"
-                  icone={IconeHome}
-                />
-
-                <MenuItem
-                  url="/vacinas"
-                  texto="Vacinas"
-                  icone={IconeVacinas}
-                />
-
-
-                <MenuItem
-                  url="/cadastro"
-                  texto="Cadastro"
-                  icone={IconeCadastro}
-                />
-
-                <MenuItem
-                  url="/tutores"
-                  texto="Tutores"
-                  icone={IconeLogin}
-                />
+                <MenuItem url="/tutores" texto="Tutores" icone={IconeLogin} />
 
                 <MenuItem
                   url="/login"
@@ -73,7 +52,7 @@ const SidebarDashboard: React.FC<SidebarProps> = (props) => {
         id="sidebarBackdrop"
       ></div>
     </>
-  )
-}
+  );
+};
 
-export default SidebarDashboard
+export default SidebarDashboard;
