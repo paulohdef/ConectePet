@@ -1,7 +1,12 @@
 import moment from "moment";
 import Link from "next/link";
 import { Pets, Tutores } from "@/typing";
-import { PencilSVG, TrashSVG, IconeUsers } from "../../../../components/icons";
+import {
+  PencilSVG,
+  TrashSVG,
+  IconeUsers,
+  IconePet,
+} from "../../../../components/icons";
 import {
   modalPetsState,
   modalTutoresState,
@@ -103,6 +108,14 @@ export default function TablePets({ petsData, usersId }: TablePetsProps) {
                   >
                     <TrashSVG />
                   </button>
+                  <Link href={`/pets/${id}`} passHref>
+                    <button
+                      className="btn btn__compact btn__delete m-3"
+                      onClick={() => {}}
+                    >
+                      <IconePet />
+                    </button>
+                  </Link>
                 </td>
               </tr>
             )

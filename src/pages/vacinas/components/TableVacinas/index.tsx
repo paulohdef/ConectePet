@@ -77,7 +77,7 @@ export default function TableVacinas({ vacinasData }: TableVacinasProps) {
 
                 <td>
                   <button
-                    className="btn btn__compact btn__delete"
+                    className="btn btn__compact btn__delete m-3"
                     onClick={() => {
                       setShowModal(true);
 
@@ -95,7 +95,7 @@ export default function TableVacinas({ vacinasData }: TableVacinasProps) {
                     <PencilSVG />
                   </button>
                   <button
-                    className="btn btn__compact btn__delete"
+                    className="btn btn__compact btn__delete m-3"
                     onClick={() => {
                       deleteVacina(id);
                     }}
