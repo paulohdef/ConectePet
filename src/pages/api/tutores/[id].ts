@@ -28,7 +28,6 @@ function tutoresHandle(req: any, res: any) {
         `${process.env.NEST_API_HOST}/users/${id}`
       );
 
-      console.log("retorno do id", data);
       res.status(200).json(data);
     } catch (e) {
       console.error(e);
@@ -53,7 +52,6 @@ function tutoresHandle(req: any, res: any) {
         cep,
       });
 
-      console.log("retorno do id", data);
       //res.status(200).json(data.centro_custo);
     } catch (e) {
       console.error(e);

@@ -1,5 +1,5 @@
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   modalPetsState,
@@ -12,22 +12,32 @@ import Layout from "@/src/components/templates/Layout";
 import Card from "@/src/components/templates/shortcodes/card";
 import Image from "next/image";
 import TablePets from "./components/TablePets";
+import useSWR from "swr";
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const AssociadoShowPage = (props: any) => {
   const users = props?.users;
-  const pets = props?.user.pets;
   const router = useRouter();
+  const id = props?.id;
 
+  const { data, error } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_HOST}/tutores/pets/${id}`,
+    fetcher,
+    {
+      fallbackData: users,
+      refreshInterval: 100,
+      onError: (error) => {
+        console.log(error);
+      },
+    }
+  );
+  const pets = data.pets;
   const setShowModal = useSetRecoilState(modalPetsState);
   const [typeRequestTutor, SetTypeRequestTutor] =
     useRecoilState(typeRequestPets);
 
-  const { id } = router.query;
-
   const [openTab, setOpenTab] = useState(1);
-
   return users ? (
     <div>
       <Layout titulo="Dashboar" subTitulo="Administrar suas informações">
@@ -230,15 +240,13 @@ export const getServerSideProps: GetServerSideProps = async (
 ) => {
   const id = context.query.id as string;
 
-  const [{ data: users }, { data: user }] = await Promise.all([
+  const [{ data: users }] = await Promise.all([
     await axios.get(`${process.env.NEXT_PUBLIC_API_HOST}/tutores/${id}`),
-    await axios.get(`${process.env.NEXT_PUBLIC_API_HOST}/tutores/pets/${id}`),
   ]);
 
   return {
     props: {
       users,
-      user,
       id,
     },
   };

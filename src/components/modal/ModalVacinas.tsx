@@ -24,8 +24,6 @@ function ModalVacinas(props: any) {
 
   useEffect(() => {
     if (!vacinas) return;
-
-    console.log("retorno no modal", vacinas);
   }, [vacinas]);
 
   const handleClose = () => {
@@ -39,16 +37,15 @@ function ModalVacinas(props: any) {
 
   switch (typeRequestVac) {
     case "POST": {
-      requestFunction = postVacinas
+      requestFunction = postVacinas;
       break;
     }
     case "PUT": {
       defaultValues = vacinaData;
-      requestFunction = updateVacinas
+      requestFunction = updateVacinas;
       break;
     }
     default: {
-      console.log(typeRequestVac);
     }
   }
 
@@ -66,7 +63,6 @@ function ModalVacinas(props: any) {
   async function onSubmit(data: Vacinas, e: any) {
     e.preventDefault();
     data.id = idVacina;
-    console.log(data);
     requestFunction(data);
     setShowModal(false);
   }

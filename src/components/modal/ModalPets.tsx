@@ -21,9 +21,6 @@ function ModalPets(props: any) {
   const usersId = props.usersId;
   const [showModal, setShowModal] = useRecoilState(modalPetsState);
 
-  console.log(idPet);
-  console.log(usersId);
-
   const typeRequestPet = useRecoilValue(typeRequestPets);
 
   const handleClose = () => {
@@ -37,17 +34,14 @@ function ModalPets(props: any) {
   switch (typeRequestPet) {
     case "POST": {
       requestFunction = postPets;
-      console.log(typeRequestPet);
       break;
     }
     case "PUT": {
       defaultValues = petData;
       requestFunction = updatePets;
-      console.log(typeRequestPet);
       break;
     }
     default: {
-      console.log(typeRequestPet);
     }
   }
 

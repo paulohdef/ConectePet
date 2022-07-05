@@ -33,8 +33,8 @@ const TutoresPage: NextPage<TutoresProps> = ({ listTutores }: TutoresProps) => {
   );
 
   const setShowModal = useSetRecoilState(modalTutoresState);
-  const [typeRequestTutor, SetTypeRequestTutor] = useRecoilState(typeRequestTutores);
-
+  const [typeRequestTutor, SetTypeRequestTutor] =
+    useRecoilState(typeRequestTutores);
 
   //   console.log('resposta swr', data)
 

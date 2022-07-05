@@ -17,7 +17,6 @@ import axios from "axios";
 function ModalTutores(props: any) {
   const idTutor = props.tutorData.id;
   const tutorData = props.tutorData;
-  console.log(props.tutorData)
   const [showModal, setShowModal] = useRecoilState(modalTutoresState);
 
   const typeRequestTutor = useRecoilValue(typeRequestTutores);
@@ -41,7 +40,6 @@ function ModalTutores(props: any) {
       break;
     }
     default: {
-      console.log(typeRequestTutores);
     }
   }
 
@@ -73,7 +71,7 @@ function ModalTutores(props: any) {
       celular,
       dataNascimento,
       cep,
-      password
+      password,
     });
     // .then( () => {
     //   alertService.success('Vacina alterada.', {
@@ -83,16 +81,15 @@ function ModalTutores(props: any) {
   }
   async function postTutores(data: any) {
     const { nome, email, celular, dataNascimento, cep, password } = data;
-    console.log(data)
     await axios.post(`${process.env.NEXT_PUBLIC_API_HOST}/tutores`, {
       nome,
       email,
       celular,
       dataNascimento,
       cep,
-      password
+      password,
     });
-    
+
     // .then( () => {
     //   alertService.success('Vacina alterada.', {
     //     keepAfterRouteChange: true,

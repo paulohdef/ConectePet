@@ -10,9 +10,10 @@ import {
 } from "@/src/atoms/modalAtom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import ModalTutores from "@/src/components/modal/ModalTutores";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import ModalPets from "@/src/components/modal/ModalPets";
+import useSWR from "swr";
 // import Pessoa from '@/src/core/Pessoa'
 // import { CentroCusto } from '@/typings'
 
@@ -20,6 +21,8 @@ interface TablePetsProps {
   petsData: Pets[];
   usersId: any;
 }
+
+const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const formatDate = (value: string) => {
   return moment().format("DD/MM/YYYY"); //moment(value).format(moment.HTML5_FMT.DATE)

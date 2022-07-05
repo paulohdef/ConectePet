@@ -12,7 +12,6 @@ function petsHandle(req: any, res: any) {
       return getPets();
     }
     case "PUT": {
-      console.log(req.body);
       return updatePets(req.body);
     }
     case "DELETE": {

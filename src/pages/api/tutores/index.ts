@@ -37,7 +37,7 @@ function tutoresHandle(req: any, res: any) {
   }
   async function updateUsers(data: any) {
     const { id, nome, email, celular, dataNascimento, cep, password } = data;
-    
+
     try {
       const { data } = await axios.put(`${process.env.NEST_API_HOST}/users`, {
         id,
@@ -66,19 +66,16 @@ function tutoresHandle(req: any, res: any) {
   }
 
   async function createUser(data: any) {
-    const {  nome, email, celular, dataNascimento, cep, password } = data;
-    console.log(data)
+    const { nome, email, celular, dataNascimento, cep, password } = data;
     try {
       const { data } = await axios.post(`${process.env.NEST_API_HOST}/users`, {
-        
         nome,
         email,
         celular,
         dataNascimento,
         cep,
-        password
+        password,
       });
-      console.log(data)
       // console.log(`meu retorno ${JSON.stringify(data)}`)
 
       res.status(200).send();
