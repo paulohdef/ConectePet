@@ -15,7 +15,7 @@ interface TableTutoresProps {
 }
 
 const formatDate = (value: string) => {
-  return moment().format("DD/MM/YYYY"); //moment(value).format(moment.HTML5_FMT.DATE)
+  return moment(value).format("DD/MM/YYYY"); //moment(value).format(moment.HTML5_FMT.DATE)
 };
 async function deleteTutor(id: any) {
   await axios
@@ -64,7 +64,7 @@ export default function TableTutores({ tutoresData }: TableTutoresProps) {
                 <td className={` text-left text-xs  p-2`}> {celular} </td>
                 <td className={` text-left text-xs  p-2`}>
                   {" "}
-                  {dataNascimento}{" "}
+                  {formatDate(dataNascimento)}{" "}
                 </td>
                 <td className={` text-left text-xs  p-2`}> {cep} </td>
 

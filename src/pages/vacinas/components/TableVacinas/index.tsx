@@ -1,7 +1,11 @@
 import moment from "moment";
 import Link from "next/link";
 import { Tutores, Vacinas } from "@/typing";
-import { modalState, modalVacinasState, typeRequestVacinas } from "@/src/atoms/modalAtom";
+import {
+  modalState,
+  modalVacinasState,
+  typeRequestVacinas,
+} from "@/src/atoms/modalAtom";
 import { PencilSVG, TrashSVG } from "../../../../components/icons";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import ModalVacinas from "@/src/components/modal/ModalVacinas";
@@ -22,13 +26,14 @@ async function deleteVacina(id: any) {
 }
 
 const formatDate = (value: string) => {
-  return moment().format("DD/MM/YYYY"); //moment(value).format(moment.HTML5_FMT.DATE)
+  return moment(value).format("DD/MM/YYYY"); //moment(value).format(moment.HTML5_FMT.DATE)
 };
 
 export default function TableVacinas({ vacinasData }: TableVacinasProps) {
   const showModalVacinas = useRecoilValue(modalVacinasState);
   const setShowModal = useSetRecoilState(modalVacinasState);
-  const [typeRequestVac, SetTypeRequestVac] = useRecoilState(typeRequestVacinas);
+  const [typeRequestVac, SetTypeRequestVac] =
+    useRecoilState(typeRequestVacinas);
 
   const [vacina, setVacina] = useState({});
 
@@ -60,8 +65,13 @@ export default function TableVacinas({ vacinasData }: TableVacinasProps) {
                 className={`${i % 2 === 0 ? "bg-gray-200" : "bg-gray-50"}`}
               >
                 <td className={` text-left text-xs  p-2`}>{nome}</td>
-                <td className={` text-left text-xs  p-2`}>{dataInicio} </td>
-                <td className={` text-left text-xs  p-2`}> {dataFim} </td>
+                <td className={` text-left text-xs  p-2`}>
+                  {formatDate(dataInicio)}{" "}
+                </td>
+                <td className={` text-left text-xs  p-2`}>
+                  {" "}
+                  {formatDate(dataFim)}{" "}
+                </td>
                 <td className={` text-left text-xs  p-2`}> {atendeGenero} </td>
                 <td className={` text-left text-xs  p-2`}> {fornecedor} </td>
 
