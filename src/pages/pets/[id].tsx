@@ -16,6 +16,8 @@ import useSWR from "swr";
 import TableVacinas from "../vacinas/components/TableVacinas";
 import TablePetVacinas from "./components/TablePetVacinas";
 import TableHistVacinas from "./components/TableHistVacinas";
+import { IconePDF } from "@/src/components/icons";
+import gerarCertificadoVacina from "@/src/functions/gerarCertificadoVacina";
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
@@ -190,6 +192,20 @@ const PetInfoPage = (props: any) => {
                         HISTÓRICO DE VACINAÇÃO
                       </p>
                     </div>
+                  </div>
+                  <div className="flex w-full flex-row mb-4 justify-start">
+                    <button
+                      className={
+                        "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-gray-400 m-5 hover:bg-gray-600"
+                      }
+                      data-toggle="tab"
+                      role="tablist"
+                      onClick={() => {
+                        gerarCertificadoVacina(data, pets);
+                      }}
+                    >
+                      <IconePDF />
+                    </button>
                   </div>
                   <div className="flex flex-col bg-white border gap-2  pb-10 border-b-2 m-5 border-gray-100">
                     <div className="flex flex-row justify-start px-1">
